@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.form {
+    display: block;
+    padding: 5vh;
+    background-color: rgb(255, 255, 255);
+    flex: 1;
+}
+
+#form {
+    text-align: center;
+}
+
+.login-container h2 {
+    display: block;
+    color: rgb(74, 148, 0);
+}
+
+.login-container p {
+    text-align: center;
+    display: block;
+}
+
+.login-container label[for="email"],
+label[for="password"],
+label[for="cfpassword"] {
+    text-align: left;
+    display: block;
+}
+
+.login-container input[type="password"],
+input[type="submit"],
+input[type="email"] {
+    width: 100%;
+    height: 4vh;
+    border-radius: 5px;
+    align-items: center;
+}
+#signupbtn{
+    width: 100%;
+    height: 4vh;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.form-group {
+    padding: 5px;
+    display: block;
+    text-align: center;
+}
+
+.intro {
+    flex: 2;
+    background-color: #73efef77;
+}
+
+#fs {
+    text-decoration: none;
+    color: black;
+}
+
+#fs:hover {
+    color: blue;
+}
+
+#fs:active {
+    color: red;
+}
+
+#btn:hover {
+    color: rgb(255, 21, 21);
+}
+
+@media (max-width: 800px) {
+    .login-container {
+        display: block !important;
+    }
+
+    .form-group {
+        width: 60%;
+        margin: auto;
+        max-width: 500px;
+    }
+
+    .intro {
+        display: none;
+    }
+}
+
+#imglogo {
+    width: 200px;
+    margin-top: 10vh;
+}
+
+#imglogo1 {
+    width: 200px;
+    margin-top: 5vh;
+}
+
+#cc {
+    width: 80%;
+}
+
+.popup {
+    width: 400px;
+    height: 200px;
+    background-color: #ffffffab;
+    border-radius: 20px;
+    border: 5px solid black;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    position: absolute !important;
+    visibility: hidden;
+    
+}
+.popup1 {
+    width: 400px;
+    height: 200px;
+    background-color: #ffffffab;
+    border-radius: 20px;
+    border: 5px solid black;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    position: absolute !important;
+    visibility: hidden;
+    
+}
+.popup.visible{
+    visibility: visible;
+}
+.popup1.visible{
+    visibility: visible;
+}
+#gotit{
+    padding: 10px;
+    border-radius: 5px;
+}
+.popup.hidden{
+    visibility: hidden;
+}
+.popup1.hidden{
+    visibility: hidden;
+}
+/* #sender{
+    
+} */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number]{
+    width: 80%;
+}
+#formget{
+    text-align: left !important;
+}
+#code{
+    width: 100%;
+    height: 4vh;
+    border-radius: 5px;
+    align-items: center;
+}
