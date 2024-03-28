@@ -62,7 +62,7 @@
                 <img src="../assets/images/logo.png" alt="" class="img img-fluid">
             </center>
             <hr />
-            <h1 class="login-title">Registration</h1>
+            <h1 class="login-title">Send OTP</h1>
             <label for="email">Email:</label>
             <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
             <input type="submit" name="login-button" value="Register" class="login-button" id="login-button">

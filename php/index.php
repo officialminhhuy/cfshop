@@ -141,7 +141,7 @@ if ($result->num_rows == 1) {
             </div>
             <div class="total">
                 <div class="total-title">Total: </div>
-                <div class="total-price">₱0</div>
+                <div class="total-price">0VND</div>
             </div>
             <!-- BUY BUTTON -->
             <button type="button" class="btn-buy">Checkout Now</button>
@@ -194,119 +194,54 @@ if ($result->num_rows == 1) {
     </section>
 
     <!-- MENU SECTION -->
-    <section class="menu" id="menu">
-        <h1 class="heading">Our <span>Menu</span></h1>
-        <div class="box-container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-1.png" alt="" class="product-img">
-                            <h3 class="product-title">Americano - Hot Espresso (12 OZ)</h3>
-                            <div class="price">₱45.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
+    <?php
+
+
+    $vd = 0;
+    $stmt = $con->prepare("SELECT PName,prices,image,validproduct FROM product WHERE validproduct > ?");
+    $stmt->bind_param("s", $vd);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        if ($result->num_rows > 0) {
+            $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            $rows = array_reverse($rows);
+            echo "<section class='menu' id='menu'>
+        <h1 class='heading'>Our <span>Menu</span></h1>
+        <div class='box-container'>
+            <div class='container'>
+                <div class='row'>";
+            foreach ($rows as $row) {
+                echo "
+        
+                    <div class='col-md-4'>
+                        <div class='box'>";
+                echo "<img src='/assets/images/" . $row["image"] . "' alt='' class='product-img'>";
+                echo "<h3 class='product-title'>" . $row["PName"] . "</h3>";
+                echo "<div class='price'>" . $row["prices"] . "VND</div>";
+                echo "<a class='btn add-cart' onclick='redirectCart()'>Add to Cart</a>";
+                // echo "<p>Available: " . $row["validproduct"] . "</p>";
+                // echo "<p><button class='minus'>-</button><input type='text' class='numberss' value='0'><button class='plus'>+</button></p>";
+                echo "
                         </div>
                     </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-2.png" alt="" class="product-img">
-                            <h3 class="product-title">Colombian Supremo Cup (12 OZ)</h3>
-                            <div class="price">₱40.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-3.png" alt="" class="product-img">
-                            <h3 class="product-title">Nitro Cold Brew w/ Straw (12 OZ)</h3>
-                            <div class="price">₱50.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div>
-                </div><br />
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-4.png" alt="" class="product-img">
-                            <h3 class="product-title">Seasonal Single-Origin (12 OZ)</h3>
-                            <div class="price">₱30.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-5.png" alt="" class="product-img">
-                            <h3 class="product-title">Indonesian Sumatra Mandheling (12 OZ)</h3>
-                            <div class="price">₱40.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-6.png" alt="" class="product-img">
-                            <h3 class="product-title">Mint Mojito Iced Coffee (12 OZ)</h3>
-                            <div class="price">₱55.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div>
-                </div><br />
-                <div class="row row-to-hide">
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-7.png" alt="" class="product-img">
-                            <h3 class="product-title">Iced Americano (12 OZ)</h3>
-                            <div class="price">₱35.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-8.png" alt="" class="product-img">
-                            <h3 class="product-title">Specialty Brews (12 OZ)</h3>
-                            <div class="price">₱85.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-9.png" alt="" class="product-img">
-                            <h3 class="product-title">Seasonal Origin (12 OZ)</h3>
-                            <div class="price">₱80.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div>
-                </div><br />
-                <div class="row row-to-hide">
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-10.png" alt="" class="product-img">
-                            <h3 class="product-title">Ethiopian Yirgacheffe Cup (12 OZ)</h3>
-                            <div class="price">₱55.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-11.png" alt="" class="product-img">
-                            <h3 class="product-title">Cold Brew Tonic In a Cup (12 OZ)</h3>
-                            <div class="price">₱35.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div><br />
-                    <div class="col-md-4">
-                        <div class="box">
-                            <img src="/assets/images/cart-item-12.png" alt="" class="product-img">
-                            <h3 class="product-title">Caramel Cold Foam Cold Brew (12 OZ)</h3>
-                            <div class="price">₱55.00</div>
-                            <a class="btn add-cart" onclick="redirectCart()">Add to Cart</a>
-                        </div>
-                    </div>
-                </div><br />
-                <center>
-                    <button id="showHideBtn" class="btn btn-dark">SHOW MORE</button>
-                </center>
+                
+";
+            }
+            echo "</div><br />
             </div>
         </div>
+            </section>";
+        }
+    }
+
+
+    ?>
+    <center>
+        <button id="showHideBtn" class="btn btn-dark">SHOW MORE</button>
+    </center>
+    </div>
+    </div>
     </section>
 
     <!-- GALLERY SECTION -->

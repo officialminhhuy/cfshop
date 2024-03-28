@@ -14,7 +14,20 @@
     <?php
     require('db.php');
     session_start();
-    // When form submitted, check and create user session.
+
+    if (!empty($_SESSION)) {
+        $username = $_SESSION["username"];
+        $query    = "SELECT username FROM `employees` WHERE username='$username'";
+        $result = mysqli_query($con, $query);
+        $rows = mysqli_num_rows($result);
+        if ($rows == 1) {
+            header("Location: Admin.php");
+        } else {
+
+            header("Location: index.php");
+        }
+    }
+
     if (isset($_POST['email'])) {
         $username = stripslashes($_REQUEST['email']); // removes backslashes
         $username = mysqli_real_escape_string($con, $username);
@@ -37,9 +50,10 @@
                 $result = mysqli_query($con, $query);
                 $rows = mysqli_num_rows($result);
                 if ($rows == 1) {
+                    echo "<script>alert('Login Successful');</script>";
                     header("Location: Admin.php");
                 } else {
-                    // Redirect to user dashboard page
+                    echo "<script>alert('Login Successful');</script>";
                     header("Location: index.php");
                 }
             } else {
@@ -56,28 +70,25 @@
         }
     } else {
     ?>
-    <form class="form" method="post" name="login">
-        <center>
-            <img src="../assets/images/logo.png" alt="" class="img img-fluid">
-        </center>
-        <hr />
-        <h1 class="login-title">Login</h1>
-        <input type="text" class="login-input" name="email" placeholder="Email" autofocus="true" />
-        <input type="password" class="login-input" name="password" placeholder="Password" />
-        <a href="/phpconnect/forgot.php">Forgotten password? </a>
-        <input type="submit" value="Login" name="submit" class="login-button" />
-        <p class="link">Don't have an account? <a href="/phpconnect/registration.php">Register here!</a></p>
-        <hr />
+        <form class="form" method="post" name="login">
+            <center>
+                <img src="../assets/images/logo.png" alt="" class="img img-fluid">
+            </center>
+            <hr />
+            <h1 class="login-title">Login</h1>
+            <input type="text" class="login-input" name="email" placeholder="Email" autofocus="true" />
+            <input type="password" class="login-input" name="password" placeholder="Password" />
+            <a href="/phpconnect/forgot.php">Forgotten password? </a>
+            <input type="submit" value="Login" name="submit" class="login-button" />
+            <p class="link">Don't have an account? <a href="/phpconnect/registration.php">Register here!</a></p>
+            <hr />
 
-        <div id="g_id_onload" data-client_id="838321752460-6ah497tdpkbekj7lfj5so48suaqhu1e7.apps.googleusercontent.com"
-            data-context="signin" data-ux_mode="popup" data-login_uri="https://kapetanncoffeeshop.infinityfreeapp.com"
-            data-auto_prompt="false">
-        </div>
+            <div id="g_id_onload" data-client_id="838321752460-6ah497tdpkbekj7lfj5so48suaqhu1e7.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="https://kapetanncoffeeshop.infinityfreeapp.com" data-auto_prompt="false">
+            </div>
 
-        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
-            data-text="signin_with" data-size="large" data-logo_alignment="center" data-callback="onSignIn">
-        </div>
-    </form>
+            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="center" data-callback="onSignIn">
+            </div>
+        </form>
     <?php
     }
     ?>

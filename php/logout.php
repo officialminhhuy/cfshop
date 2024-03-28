@@ -2,6 +2,6 @@
 session_start();
 // Destroy session
 if (session_destroy()) {
-    // Redirecting To Home Page
+    echo "<script>alert('Log out Successful');</script>";
     header("Location: /php/index.php");
 }

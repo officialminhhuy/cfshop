@@ -9,7 +9,7 @@
     --sixth-color: #e7a891;
     --black: #13131a;
     --bg: #000000;
-    --border: .1rem solid rgba(255,255,255,.3);
+    --border: .1rem solid rgba(255, 255, 255, .3);
 }
 
 * {
@@ -31,15 +31,15 @@ html {
     scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar{
-    width: .8rem; 
+html::-webkit-scrollbar {
+    width: .8rem;
 }
 
 html::-webkit-scrollbar-track {
     background: transparent;
 }
 
-html::-webkit-scrollbar-thumb{
+html::-webkit-scrollbar-thumb {
     background: #fff;
     border-radius: 5rem;
 }
@@ -82,7 +82,7 @@ section {
     color: #fff;
 }
 
-.header .navbar a:hover{
+.header .navbar a:hover {
     color: var(--main-color);
     border-bottom: .1rem solid var(--main-color);
     padding-bottom: .5rem;
@@ -95,7 +95,7 @@ section {
     margin-left: 2rem;
 }
 
-.header .icons div:hover{
+.header .icons div:hover {
     color: var(--main-color);
 }
 
@@ -184,7 +184,7 @@ section {
     color: var(--black);
     padding-bottom: .5rem;
 }
- 
+
 .header .cart .cart-item .content .price {
     font-size: 1.5rem;
     color: var(--main-color);
@@ -387,11 +387,12 @@ section {
 .menu .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap:1.5rem
+    gap: 1.5rem;
 }
 
 .menu .box-container .box {
     padding: 5rem;
+    margin-top: 2rem;
     text-align: center;
     border: var(--border);
 }
@@ -422,7 +423,7 @@ section {
     background-color: #fff;
 }
 
-.menu .box-container .box:hover >* {
+.menu .box-container .box:hover>* {
     color: var(--black);
 }
 
@@ -469,7 +470,7 @@ section {
 /* BLOGS SECTION */
 
 
-.blogs .box-container{
+.blogs .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 1.5rem;
@@ -674,22 +675,22 @@ section {
     text-transform: none;
 }
 
-.footer .support, 
+.footer .support,
 .footer .company,
-.footer .newsletters  {
+.footer .newsletters {
     flex: 0 0 calc(25% - 30px);
 }
 
-.footer .support h2, 
+.footer .support h2,
 .footer .company h2,
-.footer .newsletters h2  {
+.footer .newsletters h2 {
     font-size: 2.5rem;
     color: #333;
 }
 
-.footer .support a, 
+.footer .support a,
 .footer .company a,
-.footer .newsletters a  {
+.footer .newsletters a {
     display: block;
     margin-bottom: 8px;
     color: #666;
@@ -697,9 +698,9 @@ section {
     font-size: 1.7rem;
 }
 
-.footer .support a:hover, 
+.footer .support a:hover,
 .footer .company a:hover,
-.footer .newsletters a:hover  {
+.footer .newsletters a:hover {
     color: var(--main-color);
 }
 
@@ -717,7 +718,7 @@ section {
     color: #fff;
     background-color: var(--main-color);
     padding-right: 30px;
-}  
+}
 
 .newsletter::placeholder {
     color: #bdbdbd;
@@ -737,7 +738,7 @@ section {
     cursor: pointer;
 }
 
-.footer .credit {   
+.footer .credit {
     font-size: 2rem;
     color: #fff;
     font-weight: lighter;
@@ -768,9 +769,9 @@ section {
 
 
 /* MEDIA QUERIES */
-@media (max-width:991px){
-    html { 
-        font-size: 55%; 
+@media (max-width:991px) {
+    html {
+        font-size: 55%;
     }
 
     .header {
@@ -783,7 +784,7 @@ section {
 
 }
 
-@media (max-width:768px){
+@media (max-width:768px) {
     #menu-btn {
         display: inline-block;
     }
@@ -830,8 +831,8 @@ section {
 
 }
 
-@media (max-width:450px){
-    html { 
-        font-size: 50%; 
+@media (max-width:450px) {
+    html {
+        font-size: 50%;
     }
 }
