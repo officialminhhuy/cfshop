@@ -31,18 +31,18 @@ html {
     scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar {
+/* html::-webkit-scrollbar {
     width: .8rem;
-}
+} */
 
-html::-webkit-scrollbar-track {
+/* html::-webkit-scrollbar-track {
     background: transparent;
-}
+} */
 
-html::-webkit-scrollbar-thumb {
+/* html::-webkit-scrollbar-thumb {
     background: #fff;
     border-radius: 5rem;
-}
+} */
 
 body {
     background-color: var(--bg);
@@ -272,6 +272,68 @@ section {
     justify-content: flex-end;
     margin-top: 1.5rem;
     border-top: 1px solid var(--bg);
+}
+
+/* #totalpro {
+    padding: 10px;
+    display: block !important;
+} */
+
+.minus {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.minus:hover {
+    background-color: #a5a5a5;
+}
+
+.minus:active {
+    background-color: #5a5a5a;
+}
+
+.plus {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.plus:hover {
+    background-color: #a5a5a5;
+}
+
+.plus:active {
+    background-color: #5a5a5a;
+}
+
+.numberss {
+    height: 30px;
+    font-size: 20px;
+    width: 50px;
+    text-align: center;
+}
+
+#back {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+}
+
+/* .add-cart {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+} */
+
+#Material {
+    font-size: 20px;
 }
 
 .total-title {
@@ -726,6 +788,87 @@ section {
 
 .footer .input-wrapper {
     position: relative;
+}
+
+#Psearch {
+    border: 1px solid black;
+    padding: 20px;
+    width: 500px;
+    display: block;
+    background-color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.scfimg {
+    width: 50px;
+}
+
+.Psearch {
+    position: absolute;
+    top: 150%;
+    right: 7%;
+
+}
+
+#textse {
+    margin-left: 10px;
+}
+
+#cfimg {
+    width: 150px !important;
+}
+
+#detailsz {
+    text-align: center;
+    position: fixed;
+    width: 50%;
+    height: 70%;
+    padding: 50px;
+    background-color: rgb(241, 195, 195);
+    top: 50%;
+    left: 50%;
+    border-radius: 20px;
+    z-index: 99999;
+    animation: zoomIn 0.3s forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+.detailsz {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(55, 55, 55, 0.814);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.dtimg {
+    height: 200px;
+}
+
+#price {
+    font-size: 30px;
+}
+
+.dttext {
+    display: block;
+}
+
+.popup-screen.active {
+    display: none;
 }
 
 .fas.fa-paper-plane {

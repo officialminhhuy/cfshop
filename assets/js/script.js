@@ -18,11 +18,17 @@ document.querySelector('#cart-btn').onclick = () => {
 
 // Show Search Textbox || Close Navbar & Cart Items
 let searchForm = document.querySelector('.search-form');
-
+let foundResults = document.getElementById('found');
 document.querySelector('#search-btn').onclick = () => {
     searchForm.classList.toggle('active');
     navbar.classList.remove('active');
     cartItem.classList.remove('active');
+  
+    foundResults.style.display = "none"
+}
+document.getElementById('search-box').onfocus = () => {
+    foundResults.style.display = "block"
+    navbar.classList.remove('active');
 }
 
 // Remove Active Icons on Scroll and Close it
@@ -30,6 +36,7 @@ window.onscroll = () => {
     navbar.classList.remove('active');
     cartItem.classList.remove('active');
     searchForm.classList.remove('active');
+    foundResults.style.display = "none"
 }
 
 // Script for making icon as button
@@ -137,14 +144,14 @@ function quantityChanged(event) {
 }
 
 //Add to Cart
-function addCartClicked(event) {
-    var button = event.target;
-    var shopProducts = button.parentElement;
-    var title = shopProducts.getElementsByClassName("product-title")[0].innerText;
-    var price = shopProducts.getElementsByClassName("price")[0].innerText;
-    var productImg = shopProducts.getElementsByClassName("product-img")[0].src;
-    addProductToCart(title, price, productImg);
-    updateTotal();
+function addCartClicked() {
+    var productNameElement = document.querySelector('#dttext');
+    if (productNameElement !== null) {
+        var productName = productNameElement.innerText;
+        console.log(productName);
+    } else {
+        console.log(productName);
+    }
 }
 
 function addProductToCart(title, price, productImg) {
@@ -194,4 +201,75 @@ function updateTotal() {
         total = Math.round(total * 100) / 100;
         
         document.getElementsByClassName("total-price")[0].innerText = total+"VND";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var plusButtons = document.querySelectorAll('.plus');
+    var minusButtons = document.querySelectorAll('.minus');
+    var inputFields = document.querySelectorAll('.numberss');
+
+    plusButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var inputField = this.previousElementSibling;
+            var currentValue = parseInt(inputField.value);
+            var newValue = currentValue + 1;
+            inputField.value = newValue;
+            console.log (inputField.value)
+        });
+    });
+
+
+    minusButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var inputField = this.nextElementSibling;
+            var currentValue = parseInt(inputField.value);
+            var newValue = Math.max(currentValue - 1, 1);
+            inputField.value = newValue;
+        });
+    });
+});
+
+    
+
+function viewLive(productId) {
+    $.ajax({
+        url: "/php/detail.php",
+        method: "POST",
+        data: { productId: productId }, 
+        success: function(response) {
+            console.log(productId)
+            $("#detailz").html(response).css("display", "block");
+            // console.log(response)
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
+
+}
+
+
+$('.btn.views').click(function(e) {
+    e.preventDefault(); 
+    var productId = $(this).data('product-id'); 
+    viewLive(productId);
+});
+function hidePopup() {
+    var popupScreen = document.querySelector(".popup-screen");
+    popupScreen.classList.toggle("active");
+
+}
+let popupWindow;
+
+function openPopup() {
+    // Chặn cuộn trang khi popup được mở lên
+    document.documentElement.style.overflow = 'hidden';
+    // Thêm sự kiện 'beforeunload' để khi popup bị đóng, chúng ta có thể bỏ chặn cuộn trang
+    window.addEventListener('beforeunload', closePopupHandler);
+}
+function closePopupHandler() {
+    // Bỏ chặn cuộn trang khi popup được đóng
+    document.documentElement.style.overflow = '';
+    // Xóa sự kiện 'beforeunload' để tránh xảy ra lỗi khi không còn popup mở nữa
+    window.removeEventListener('beforeunload', closePopupHandler);
 }

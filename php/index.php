@@ -129,9 +129,33 @@ if ($result->num_rows == 1) {
 
         <!-- SEARCH TEXT BOX -->
         <div class="search-form">
-            <input type="search" id="search-box" class="form-control" placeholder="search here...">
+            <input type="search" id="search-box" class="form-control" placeholder="search here..." autocomplete="off">
             <label for="search-box" class="fas fa-search"></label>
         </div>
+        <div id="found"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $("#search-box").keyup(function() {
+                var input = $(this).val();
+                if (input != "") {
+                    $.ajax({
+                        url: "/php/productsearch.php",
+                        method: "POST",
+                        data: {
+                            input: input
+                        },
+                        success: function(data) {
+                            $("#found").html(data).css("display", "block");
+                        }
+                    })
+                } else {
+                    $("#found").css("display", "none")
+                }
+            });
+        });
+        </script>
 
         <!-- CART SECTION -->
         <div class="cart">
@@ -158,7 +182,7 @@ if ($result->num_rows == 1) {
                     echo $username;
                 } ?>!</h3>
             <p>
-                <strong>We are open 4:00 PM to 9:00 PM.</strong>
+                <strong>We are open 8:00 AM to 8:00 PM.</strong>
             </p>
             <a href="#menu" class="btn btn-dark text-decoration-none">Order Now!</a>
         </div>
@@ -193,12 +217,10 @@ if ($result->num_rows == 1) {
         </div>
     </section>
 
-    <!-- MENU SECTION -->
+    <!-- MENU -->
     <?php
-
-
     $vd = 0;
-    $stmt = $con->prepare("SELECT PName,prices,image,validproduct FROM product WHERE validproduct > ?");
+    $stmt = $con->prepare("SELECT P_ID,PName,prices,image,validproduct FROM product WHERE validproduct > ?");
     $stmt->bind_param("s", $vd);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -212,21 +234,29 @@ if ($result->num_rows == 1) {
             <div class='container'>
                 <div class='row'>";
             foreach ($rows as $row) {
-                echo "
-        
-                    <div class='col-md-4'>
+                echo "<div class='col-md-4'>
                         <div class='box'>";
                 echo "<img src='/assets/images/" . $row["image"] . "' alt='' class='product-img'>";
                 echo "<h3 class='product-title'>" . $row["PName"] . "</h3>";
-                echo "<div class='price'>" . $row["prices"] . "VND</div>";
-                echo "<a class='btn add-cart' onclick='redirectCart()'>Add to Cart</a>";
-                // echo "<p>Available: " . $row["validproduct"] . "</p>";
-                // echo "<p><button class='minus'>-</button><input type='text' class='numberss' value='0'><button class='plus'>+</button></p>";
+                // echo "<div class='price'>" . $row["prices"] . "VND</div>";
+                echo "<a class='btn views' onclick='openPopup()'  data-product-id='" . $row["P_ID"] . "'   >View</a>";
+
+    ?>
+    <!-- product details -->
+    <div id="detailz"></div>
+    <div>
+
+        <?php
+                    echo "<p>Available: " . $row["validproduct"] . "</p>";
+                    echo "<p><button class='minus'>-</button><input type='text' class='numberss' value='0'><button class='plus'>+</button></p>";
+                    // echo "<a class='btn add-cart' onclick='redirectCart()'>Add to Cart</a>";
+                    ?>
+    </div>
+    <?php
                 echo "
                         </div>
                     </div><br />
-                
-";
+                ";
             }
             echo "</div><br />
             </div>
@@ -598,14 +628,15 @@ if ($result->num_rows == 1) {
 
     <!-- JS File Link -->
     <?php
-    if (!empty($_SESSION)) {
-        echo "<script src='/assets/js/script.js'></script>";
-    }
+    echo "<script src='/assets/js/script.js'></script>";
+    // if (!empty($_SESSION)) {
+
+    // }
     ?>
     <script src="/assets/js/responses.js"></script>
     <script src="/assets/js/convo.js"></script>
     <script src="/assets/js/googleSignIn.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
     <script>
     // CODE FOR THE FORMSPREE
@@ -636,18 +667,18 @@ if ($result->num_rows == 1) {
     }
 
     // CODE FOR THE SHOW MORE & SHOW LESS BUTTON IN MENU
-    $(document).ready(function() {
-        $(".row-to-hide").hide();
-        $("#showHideBtn").text("SHOW MORE");
-        $("#showHideBtn").click(function() {
-            $(".row-to-hide").toggle();
-            if ($(".row-to-hide").is(":visible")) {
-                $(this).text("SHOW LESS");
-            } else {
-                $(this).text("SHOW MORE");
-            }
-        });
-    });
+    // $(document).ready(function() {
+    //     $(".row-to-hide").hide();
+    //     $("#showHideBtn").text("SHOW MORE");
+    //     $("#showHideBtn").click(function() {
+    //         $(".row-to-hide").toggle();
+    //         if ($(".row-to-hide").is(":visible")) {
+    //             $(this).text("SHOW LESS");
+    //         } else {
+    //             $(this).text("SHOW MORE");
+    //         }
+    //     });
+    // });
 
     // CODE FOR THE SHOW MORE & SHOW LESS BUTTON IN GALLERY
     $(document).ready(function() {
@@ -664,14 +695,14 @@ if ($result->num_rows == 1) {
     });
 
     // CODE FOR THE REDIRECT CART
-    // function redirectCart() {
-    //     // Check if the user is logged in
-    //     if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
-    //         // Redirect the user to the login page
-    //         alert("You are not logged in. Please log into your account and try again.");
-    //         window.location.href = "login.php";
-    //     }
-    // }
+    function redirectCart() {
+        // Check if the user is logged in
+        if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
+            // Redirect the user to the login page
+            alert("You are not logged in. Please log into your account and try again.");
+            window.location.href = "login.php";
+        }
+    }
     </script>
 </body>
 
