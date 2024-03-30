@@ -19,49 +19,70 @@
         $username = mysqli_real_escape_string($con, $username);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
+        $cfpassword = stripslashes($_REQUEST['cfpassword']);
+        $cfpassword = mysqli_real_escape_string($con, $cfpassword);
         $status = "disable";
         // $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `accounts` (username, password, status)
+        if ($password == $cfpassword) {
+            $query    = "INSERT into `accounts` (username, password, status)
                             VALUES ('$username', '" . md5($password) . "','$status')";
-        $result   = mysqli_query($con, $query);
-        if ($result) {
-            session_start();
-            $_SESSION["username"] = $username;
-            $_SESSION["password"] = $password;
-            $user = [
-                'username' => $username,
-                'password' => $password,
-                'status' => $status
-            ];
-            $newUser = $database->getReference('users')->push($user);
+            $result   = mysqli_query($con, $query);
+            if ($result) {
+                $Name = $_POST["name"];
+                $CDOB = $_POST["DOB"];
+                $address = $_POST["address"];
+                $password = $_POST["password"];
+                $insertAccountStmt = $con->prepare("INSERT INTO customer (CName,CDOB,Address,username) VALUES (?,?,?,?)");
+                $insertAccountStmt->bind_param("ssss", $Name, $CDOB, $address, $username);
+                if ($insertAccountStmt->execute()) {
+                    session_start();
+                    $_SESSION["username"] = $username;
+                    $_SESSION["password"] = $password;
+                    $_SESSION["name"] = $Name;
+                    $user = [
+                        'username' => $username,
+                        'password' => $password,
+                        'status' => $status
+                    ];
+                    $newUser = $database->getReference('users')->push($user);
 
-            if ($newUser) {
-                include("verify.php");
+                    if ($newUser) {
+                        include("verify.php");
+                    } else {
+                    }
+                }
             } else {
-            }
-        } else {
-            echo "<div class='form'>
+                echo "<div class='form'>
                             <h3>Required fields are missing.</h3><br/>
                         <p class='link'>Click here to <a href='registration.php'>registration</a> again.</p>
                         </div>";
+            }
+        } else {
+            echo "<script> alert(Confirm password is not match);</script>";
         }
     } else {
     ?>
-    <form class="form" action="" method="post">
-        <center>
-            <img src="../assets/images/logo.png" alt="" class="img img-fluid">
-        </center>
-        <hr />
-        <h1 class="login-title">Registration</h1>
-        <label for="email">Email:</label>
-        <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
-        <label for="password">Password:</label>
-        <input type="text" class="login-input" name="password" placeholder="Password" required />
-        <label for="cfpassword">Confirm password:</label>
-        <input type="text" class="login-input" name="cfpassword" placeholder="Confirm password" required>
-        <input type="submit" name="login-button" value="Register" class="login-button" id="login-button">
-        <p class="link">Already have an account? <a href="/php/login.php">Login here!</a></p>
-    </form>
+        <form class="form" action="" method="post">
+            <center>
+                <img src="../assets/images/logo.png" alt="" class="img img-fluid">
+            </center>
+            <hr />
+            <h1 class="login-title">Registration</h1>
+            <label for="name">Full name:</label>
+            <input type="text" class="login-input" name="name" placeholder="Your full name" required />
+            <label for="DOB">Date of birth:</label>
+            <input type="date" class="login-input" name="DOB" required />
+            <label for="address">Address:</label>
+            <input type="text" class="login-input" name="address" placeholder="Your full name" required />
+            <label for="email">Email:</label>
+            <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
+            <label for="password">Password:</label>
+            <input type="text" class="login-input" name="password" placeholder="Password" required />
+            <label for="cfpassword">Confirm password:</label>
+            <input type="text" class="login-input" name="cfpassword" placeholder="Confirm password" required>
+            <input type="submit" name="login-button" value="Register" class="login-button" id="login-button">
+            <p class="link">Already have an account? <a href="/php/login.php">Login here!</a></p>
+        </form>
     <?php
     }
     ?>

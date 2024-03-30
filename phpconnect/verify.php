@@ -25,7 +25,7 @@ if (isset($_POST['login-button'])) {
         exit();
     } else {
         $_SESSION['status'] = " Create not successful!";
-        header("Location: register.php");
+        header("Location: registration.php");
         exit();
     }
 }

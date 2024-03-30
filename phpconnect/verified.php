@@ -8,17 +8,10 @@ try {
     if ($user->emailVerified) {
         echo 'Email is verified';
         $status = "active";
-
         $insertAccountStmt = $con->prepare("UPDATE accounts SET status = ? WHERE username = ?");
         $insertAccountStmt->bind_param("ss", $status, $username);
         if ($insertAccountStmt->execute()) {
-            $insertAccountStmt = $con->prepare("INSERT INTO customer (username) VALUES (?)");
-            $insertAccountStmt->bind_param("s", $username);
-            if ($insertAccountStmt->execute()) {
-                header("Location: /php/index.php");
-            } else {
-                echo 'Email is not verified';
-            }
+            header("Location: /php/index.php");
         }
     } else {
         echo 'Hi,';

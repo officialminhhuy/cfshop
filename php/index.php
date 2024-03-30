@@ -117,7 +117,7 @@ if ($result->num_rows == 1) {
             </a>
         </div>
         <div class="optionlogged">
-            <h1>Hi user, <?php echo "$username"; ?>!</h1>
+            <h1>Hi user, <?php echo "$name"; ?>!</h1>
             <a href="/php/Login.php  " class="link">
                 <button id="optionbtn">Account</button>
             </a>
@@ -177,8 +177,8 @@ if ($result->num_rows == 1) {
             <h3>Welcome to KapeTann Coffee Shop
                 <?php if (!empty($_SESSION)) {
                     echo ", ";
-                    $username = $_SESSION["username"];
-                    echo $username;
+                    $name = $_SESSION["name"];
+                    echo $name;
                 } ?>!</h3>
             <p>
                 <strong>We are open 8:00 AM to 8:00 PM.</strong>

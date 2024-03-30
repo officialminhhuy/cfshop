@@ -51,10 +51,28 @@
                 $rows = mysqli_num_rows($result);
                 if ($rows == 1) {
                     echo "<script>alert('Login Successful');</script>";
-                    header("Location: Admin.php");
+                    $stmt = $con->prepare("SELECT EName FROM employees WHERE username = ?");
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows === 1) {
+                        $row = $result->fetch_assoc();
+                        $name = $row['EName'];
+                        $_SESSION['name'] = $name;
+                    }
+                    header("Refresh:0; url=/php/Admin.php");
                 } else {
                     echo "<script>alert('Login Successful');</script>";
-                    header("Location: index.php");
+                    $stmt = $con->prepare("SELECT CName FROM customer WHERE username = ?");
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows === 1) {
+                        $row = $result->fetch_assoc();
+                        $name = $row['CName'];
+                        $_SESSION['name'] = $name;
+                    }
+                    header("Refresh:0; url=/php/index.php");
                 }
             } else {
                 echo "<div class='form'>

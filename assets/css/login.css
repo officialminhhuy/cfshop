@@ -1,12 +1,14 @@
 body {
     background: #3e4144;
 }
+
 .form {
     margin: 50px auto;
     width: 300px;
     padding: 30px 25px;
     background: white;
 }
+
 h1.login-title {
     color: #666;
     margin: 0px auto 25px;
@@ -14,18 +16,21 @@ h1.login-title {
     font-weight: 300;
     text-align: center;
 }
+
 .login-input {
     font-size: 15px;
     border: 1px solid #ccc;
     padding: 10px;
-    margin-bottom: 25px;
-    height: 25px;
+    margin-bottom: 15px;
+    height: 20px;
     width: calc(100% - 23px);
 }
+
 .login-input:focus {
-    border-color:#6e8095;
+    border-color: #6e8095;
     outline: none;
 }
+
 .login-button {
     color: #fff;
     background: #9F5C44;
@@ -49,9 +54,11 @@ h1.login-title {
     text-align: center;
     margin-bottom: 0px;
 }
+
 .link a {
     color: #666;
 }
+
 h3 {
     font-weight: normal;
     text-align: center;
