@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
         </nav>
         <div class="icons">
             <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-shopping-cart" id="cart-btn" onclick="redirectCart()"></div>
+            <div id="cart-btn" onclick="redirectCart()"></div>
             <div class="fas fa-bars" id="menu-btn"></div>
         </div>
         <div class="menu1">
@@ -188,7 +188,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
         <div class="popup-screen">
             <div class="popup-box">
                 <div class="detailsz">
-                    <a id="produz">
+                    <a1 id="produz">
+                        <a href="/php/Admin.php" id="back" class="btn back">back</a>
                         <form method="post" enctype="multipart/form-data">
                             <h1 id="h1tt">
                                 Post product</h1>
@@ -205,8 +206,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
                                 <input type="file" id="imgfile" name="imgs" accept="image/*" required>
                             </div>
                             <button class="btn" id="sumbit">Upload</button>
+
+
                         </form>
-                    </a>
+
+                    </a1>
                 </div>
 
             </div>

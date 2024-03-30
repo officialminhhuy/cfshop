@@ -261,14 +261,10 @@ function hidePopup() {
 let popupWindow;
 
 function openPopup() {
-    // Chặn cuộn trang khi popup được mở lên
     document.documentElement.style.overflow = 'hidden';
-    // Thêm sự kiện 'beforeunload' để khi popup bị đóng, chúng ta có thể bỏ chặn cuộn trang
     window.addEventListener('beforeunload', closePopupHandler);
 }
 function closePopupHandler() {
-    // Bỏ chặn cuộn trang khi popup được đóng
     document.documentElement.style.overflow = '';
-    // Xóa sự kiện 'beforeunload' để tránh xảy ra lỗi khi không còn popup mở nữa
     window.removeEventListener('beforeunload', closePopupHandler);
 }

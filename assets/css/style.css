@@ -211,6 +211,63 @@ section {
 }
 
 /* CART SECTION */
+#title {
+    color: white !important;
+    font-size: 50px;
+    margin-top: 150px;
+    text-align: center;
+    color: rgb(255, 165, 180) !important;
+}
+
+#table {
+    width: 98%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+
+th,
+td {
+    background-color: #2f2f2fc7;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    color: rgb(255, 101, 127);
+    text-transform: none;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 8%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 20%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 20%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 17%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 25%;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 10%;
+}
 
 .cart-title {
     text-align: center;
@@ -332,9 +389,6 @@ section {
     transform: translateX(-50%);
 } */
 
-#Material {
-    font-size: 20px;
-}
 
 .total-title {
     font-size: 2rem;
@@ -790,7 +844,7 @@ section {
     position: relative;
 }
 
-#Psearch {
+.Psearch1 {
     border: 1px solid black;
     padding: 20px;
     width: 500px;
@@ -800,15 +854,23 @@ section {
     font-size: 20px;
 }
 
-label[for="proname"],
-label[for="material"],
-label[for="validpro"],
-label[for="prices"],
-label[for="imgs"] {
+#fontedit {
     display: block;
     font-size: 20px;
     font-weight: bolder;
     text-align: left;
+}
+
+.edimg {
+
+    max-height: 70px;
+    width: 70px;
+}
+
+.sizeedit {
+    width: 100%;
+    font-size: 15px;
+
 }
 
 #h1tt {
@@ -857,6 +919,7 @@ input[type="file"] {
 
 .scfimg {
     width: 50px;
+    height: 50px;
 }
 
 .Psearch {

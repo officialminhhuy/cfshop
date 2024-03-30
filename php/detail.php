@@ -5,8 +5,7 @@
     <div class="popup-box">
         <?php
         include("db.php");
-        session_start();
-        $username = $_SESSION["username"];
+        include("auth_session.php");
         if (isset($_POST['productId'])) {
             $productId = $_POST['productId']; // Lấy giá trị productId từ $_POST
             $stmt = $con->prepare("SELECT PName, Material, image, prices,validproduct FROM product WHERE P_ID = ?");
@@ -20,15 +19,42 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 if ($result->num_rows === 1) {
+
+
         ?>
                     <div class="detailsz">
                         <a id="detailsz">
-                            <img src="/assets/images/<?php echo $row["image"]; ?>" alt="" class="dtimg"><br>
-                            <h1 id="dttext"><?php echo $row['PName']; ?></h1><br>
-                            <!-- <p>Available:<?php echo $row["validproduct"] ?> </p>; -->
-                            <p id="material"><?php echo $row['Material']; ?></p>
-                            <p id="price">Price: <?php echo $row['prices']; ?>VND</p>
-                            <a1 class="btn add-cart" onclick="addCartClicked()">Edit info</a1>
+
+                            <form method="post" action="update.php" enctype="multipart/form-data">
+                                <img src="/assets/images/<?php echo $row["image"]; ?>" alt="" class="edimg"><br>
+                                <p id="fontedit" style="display: none;">
+                                    ID
+                                    <input class="sizeedit" name="id" type="text" value="<?php echo $productId ?>">
+                                </p>
+                                <p id="fontedit">
+                                    Name:
+                                    <input class="sizeedit" name="proname" type="text" value="<?php echo $row['PName']; ?>"><br>
+                                </p>
+
+                                <p id="fontedit">
+                                    Material:
+                                    <input class="sizeedit" name="material" type="text" value="<?php echo $row['Material']; ?>">
+                                </p>
+                                <p id="fontedit">
+                                    Price:
+                                    <input class="sizeedit" name="prices" value="<?php echo $row['prices']; ?>">
+                                </p>
+                                <p id="fontedit">
+                                    Available:
+                                    <input class="sizeedit" name="validpro" type="text" value="<?php echo $row["validproduct"] ?>">
+                                </p>
+                                <p id="fontedit" style="text-transform: none;">
+                                    New Image:
+                                    <input type="file" name="imgs" accept="image/*">
+                                    (Skip if not update)
+                                </p>
+                                <button class="btn add-cart" onclick="addCartClicked()" type="submit">Update</button>
+                            </form>
                             <div id="back">
                                 <a1 class="btn back" onclick="hidePopup();closePopupHandler();">Back</a1>
                             </div>
@@ -37,6 +63,7 @@
                         </a>
                     </div>
                 <?php
+
                 } else {
 
                 ?>
@@ -66,20 +93,3 @@
         ?>
     </div>
 </div>
-<script>
-    // var addCart = document.getElementsByClassName('idpro');
-    // for (var i = 0; i < addCart.length; i++) {
-    //     var button = addCart[i];
-    //     button.addEventListener("click", addCartClicked);
-    // }
-
-    // function addCartClicked() {
-    //     var productNameElement = document.querySelector('#dttext');
-    //     if (productNameElement !== null) {
-    //         var productName = productNameElement.innerText;
-    //         console.log(productName);
-    //     } else {
-    //         console.log(productName);
-    //     }
-    // }
-</script>
