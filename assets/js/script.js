@@ -23,7 +23,6 @@ document.querySelector('#search-btn').onclick = () => {
     searchForm.classList.toggle('active');
     navbar.classList.remove('active');
     cartItem.classList.remove('active');
-  
     foundResults.style.display = "none"
 }
 document.getElementById('search-box').onfocus = () => {
@@ -145,7 +144,7 @@ function quantityChanged(event) {
 
 //Add to Cart
 function addCartClicked() {
-    var productNameElement = document.querySelector('#dttext');
+    var productNameElement = document.querySelector('.idpro');
     if (productNameElement !== null) {
         var productName = productNameElement.innerText;
         console.log(productName);

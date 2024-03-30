@@ -14,6 +14,8 @@ if ($result->num_rows == 1) {
         option.classList.toggle('visible');
         var button = document.querySelector('.menubtn');
         button.classList.toggle('roll');
+        searchForm.classList.remove('active');
+        cartItem.classList.remove('active');
     }
     </script>";
 } else {
@@ -23,6 +25,8 @@ if ($result->num_rows == 1) {
         option.classList.toggle('visible');
         var button = document.querySelector('.menubtn');
         button.classList.toggle('roll');
+        searchForm.classList.remove('active');
+        cartItem.classList.remove('active');
     }
     </script>";
 }
