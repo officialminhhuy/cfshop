@@ -86,11 +86,7 @@ function buyButtonClicked() {
     var cartContent = document.getElementsByClassName("cart-content")[0];
     var cartBoxes = cartContent.getElementsByClassName("cart-box");
     var orderDetails = [];
-
-    // Generate invoice number
     var invoiceNumber = generateInvoiceNumber();
-
-    // Loop through all cart boxes to get details
     for (var i = 0; i < cartBoxes.length; i++) {
         var cartBox = cartBoxes[i];
         var title = cartBox.getElementsByClassName("cart-product-title")[0].innerText;
@@ -202,6 +198,46 @@ function updateTotal() {
         document.getElementsByClassName("total-price")[0].innerText = total+"VND";
 }
 
+function addLive(productadd) {
+    $.ajax({
+        url: "/php/plus.php",
+        method: "POST",
+        data: { productadd: productadd }, 
+        success: function(response) {
+            console.log(productadd)
+            console.log(response)
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
+
+}
+$('.plus').click(function(e) {
+    e.preventDefault(); 
+    var productadd = $(this).data('product-add'); 
+    addLive(productadd);
+});
+function minusLive(productadd) {
+    $.ajax({
+        url: "/php/minus.php",
+        method: "POST",
+        data: { productadd: productadd }, 
+        success: function(response) {
+            console.log(productadd)
+            console.log(response)
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
+
+}
+$('.minus').click(function(e) {
+    e.preventDefault(); 
+    var productadd = $(this).data('product-add'); 
+    minusLive(productadd);
+});
 document.addEventListener("DOMContentLoaded", function() {
     var plusButtons = document.querySelectorAll('.plus');
     var minusButtons = document.querySelectorAll('.minus');
@@ -222,8 +258,13 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener('click', function() {
             var inputField = this.nextElementSibling;
             var currentValue = parseInt(inputField.value);
-            var newValue = Math.max(currentValue - 1, 1);
+            var newValue = Math.max(currentValue - 1, 0);
             inputField.value = newValue;
+            console.log (inputField.value)
+            if(inputField.value == 0){
+                location.reload();
+            }
+            
         });
     });
 });
@@ -253,6 +294,9 @@ $('.btn.views').click(function(e) {
     var productId = $(this).data('product-id'); 
     viewLive(productId);
 });
+
+
+
 function hidePopup() {
     var popupScreen = document.querySelector(".popup-screen");
     popupScreen.classList.toggle("active");
@@ -267,4 +311,23 @@ function openPopup() {
 function closePopupHandler() {
     document.documentElement.style.overflow = '';
     window.removeEventListener('beforeunload', closePopupHandler);
+}
+const numberssElements = document.querySelectorAll('.numberss');
+const viewsElements = document.querySelectorAll('.btn.views');
+
+// Loop over both collections simultaneously
+for (let i = 0; i < numberssElements.length; i++) {
+    const item = numberssElements[i];
+    const element = viewsElements[i];
+    if (parseInt(item.value) <= 0) {
+        item.previousElementSibling.style.display = 'none';
+        item.nextElementSibling.style.display = 'none';
+        item.style.display = 'none';
+        element.style.display = '';
+    } else {
+        item.previousElementSibling.style.display = '';
+        item.nextElementSibling.style.display = '';
+        item.style.display = '';
+        element.style.display = 'none';
+    }
 }

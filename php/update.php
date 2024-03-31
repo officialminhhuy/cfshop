@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $successMessage = "Updated Successfully!";
                 if ($stmt->execute()) {
                     echo  '<script>alert("Updated Successfully!");</script>';
-                    header("Refresh:0; url=/php/Admin.php#menu");
+                    header("Refresh:0; url=/php/Admin.php#$id)");
                 } else {
                     echo '<script>alert("Error!");</script>';
                     sleep(2);
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->execute()) {
                     echo  '<script>alert("Updated Successfully!");</script>';
 
-                    header("Refresh:0; url=/php/Admin.php#menu");
+                    header("Refresh:0; url=/php/Admin.php#$id");
                 } else {
                     echo '<script>alert("Error!");</script>';
                     sleep(2);
