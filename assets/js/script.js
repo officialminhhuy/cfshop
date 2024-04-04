@@ -15,8 +15,6 @@ document.querySelector('#cart-btn').onclick = () => {
     navbar.classList.remove('active');
     searchForm.classList.remove('active');
 }
-
-// Show Search Textbox || Close Navbar & Cart Items
 let searchForm = document.querySelector('.search-form');
 let foundResults = document.getElementById('found');
 document.querySelector('#search-btn').onclick = () => {
@@ -128,6 +126,26 @@ function removeCartItem(event) {
     buttonClicked.parentElement.remove();
     updateTotal();
 }
+function updateMenu(sortOption) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "product.php?sortOption=" + sortOption, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            document.getElementById("menu").innerHTML = response.menu;
+            document.getElementById("sort").value = sortOption;
+        }
+    };
+    xhr.send();
+}
+
+document.getElementById("sort").addEventListener("change", function() {
+    var selectBox = document.getElementById("sort");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    console.log("Selected Sort Option: " + selectedValue);
+    updateMenu(selectedValue);
+});
+
 
 // Function for "When quantity changes"
 function quantityChanged(event) {
@@ -268,9 +286,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
-    
-
 function viewLive(productId) {
     $.ajax({
         url: "/php/detail.php",
@@ -279,7 +294,6 @@ function viewLive(productId) {
         success: function(response) {
             console.log(productId)
             $("#detailz").html(response).css("display", "block");
-            // console.log(response)
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
@@ -287,15 +301,11 @@ function viewLive(productId) {
     });
 
 }
-
-
 $('.btn.views').click(function(e) {
     e.preventDefault(); 
     var productId = $(this).data('product-id'); 
     viewLive(productId);
 });
-
-
 
 function hidePopup() {
     var popupScreen = document.querySelector(".popup-screen");
@@ -314,8 +324,6 @@ function closePopupHandler() {
 }
 const numberssElements = document.querySelectorAll('.numberss');
 const viewsElements = document.querySelectorAll('.btn.views');
-
-// Loop over both collections simultaneously
 for (let i = 0; i < numberssElements.length; i++) {
     const item = numberssElements[i];
     const element = viewsElements[i];

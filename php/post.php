@@ -40,7 +40,7 @@ if ($result->num_rows == 1) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
-    $targetDir = "C:\\Users\\quili\\OneDrive\\Máy tính\\cfclone\\coffee-shop-website\\assets\\images\\";
+    $targetDir = "../assets/images/";
     $targetFile = $targetDir . basename($_FILES["imgs"]["name"]);
     $insertimg =  basename($_FILES["imgs"]["name"]);
     $uploadOk = 1;
@@ -96,14 +96,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>KapeTann Brewed Coffee Shop</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2Hhh_14Uam62GXGaTMcXWhhVkYg0EbDY&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2Hhh_14Uam62GXGaTMcXWhhVkYg0EbDY&callback=initMap"
+        async defer></script>
 
     <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -198,7 +203,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
                             <label for="material">Material:</label>
                             <input type="text" name="material" id="postfield" placeholder="Detail of product" required>
                             <label for="validpro">Numbers get:</label>
-                            <input type="text" name="validpro" id="postfield" placeholder="Number get for sale" required>
+                            <input type="text" name="validpro" id="postfield" placeholder="Number get for sale"
+                                required>
                             <label for="prices">Price:</label>
                             <input type="text" name="prices" id="postfield" placeholder="Sale price" required>
                             <label for="imgs">Image:</label>

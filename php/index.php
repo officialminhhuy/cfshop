@@ -37,22 +37,18 @@ if ($result->num_rows == 1) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>KapeTann Brewed Coffee Shop</title>
-    <script src="/assets/js/addcart.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2Hhh_14Uam62GXGaTMcXWhhVkYg0EbDY&callback=initMap"
-        async defer></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -61,7 +57,6 @@ if ($result->num_rows == 1) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- font awesome cdn link -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico"><!-- Favicon / Icon -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!-- Google font cdn link -->
 </head>
 
 <body>
@@ -137,35 +132,33 @@ if ($result->num_rows == 1) {
             <label for="search-box" class="fas fa-search"></label>
         </div>
         <div id="found"></div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script type="text/javascript">
-        $(document).ready(function() {
-            $("#search-box").keyup(function() {
-                var input = $(this).val();
-                if (input != "") {
-                    $.ajax({
-                        url: "/php/productsearch.php",
-                        method: "POST",
-                        data: {
-                            input: input
-                        },
-                        success: function(data) {
-                            $("#found").html(data).css("display", "block");
-                        }
-                    })
-                } else {
-                    $("#found").css("display", "none")
-                }
+            $(document).ready(function() {
+                $("#search-box").keyup(function() {
+                    var input = $(this).val();
+                    if (input != "") {
+                        $.ajax({
+                            url: "/php/productsearch.php",
+                            method: "POST",
+                            data: {
+                                input: input
+                            },
+                            success: function(data) {
+                                $("#found").html(data).css("display", "block");
+                            }
+                        })
+                    } else {
+                        $("#found").css("display", "none")
+                    }
+                });
             });
-        });
         </script>
 
         <!-- CART SECTION -->
         <div class="cart">
             <h2 class="cart-title">Your Cart:</h2>
             <div class="cart-content">
-
             </div>
             <div class="total">
                 <div class="total-title">Total: </div>
@@ -220,73 +213,22 @@ if ($result->num_rows == 1) {
             </div>
         </div>
     </section>
+    <h1 class="heading">Our <span>Menu</span>
+        <div class="bordersort">
+            <span class="glyphicon glyphicon-sort"></span> Sort
+            <select id="sort" class="sort btn-default btn-sm">
+                <option value="1">Newest</option>
+                <option value="2">Price: High to Low</option>
+                <option value="3">Price: Low to High</option>
+                <option value="4">Name: A to Z</option>
+                <option value="5">Name: Z to A</option>
+            </select>
+        </div>
+    </h1>
 
     <!-- MENU -->
     <?php
-    $vd = 0;
-    $stmt = $con->prepare("SELECT P_ID,PName,prices,image,validproduct FROM product WHERE validproduct > ?");
-    $stmt->bind_param("s", $vd);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        if ($result->num_rows > 0) {
-            $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            $rows = array_reverse($rows);
-            echo "<section class='menu' id='menu'>
-        <h1 class='heading'>Our <span>Menu</span></h1>
-        <div class='box-container'>
-            <div class='container'>
-                <div class='row'>";
-            foreach ($rows as $row) {
-                echo "<div class='col-md-4'id='" . $row["P_ID"] . "'>
-                        <div class='box'>";
-                echo "<img src='/assets/images/" . $row["image"] . "' alt='' class='product-img'>";
-                echo "<h3 class='product-title'>" . $row["PName"] . "</h3>";
-                // echo "<div class='price'>" . $row["prices"] . "VND</div>";
-                echo "<p>Available: " . $row["validproduct"] . "</p>";
-                echo "<a class='btn views' onclick='openPopup()'  data-product-id='" . $row["P_ID"] . "'   >View</a>";
-                $pid = $row["P_ID"]
-
-    ?>
-    <!-- product details -->
-    <div id="detailz"></div>
-    <div>
-
-        <?php
-                    $stmt = $con->prepare("SELECT C_ID FROM customer WHERE username = ?");
-                    $stmt->bind_param("s", $username);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    if ($result->num_rows > 0) {
-                        $row = $result->fetch_assoc();
-                        $cid = $row['C_ID'];
-                    }
-                    $num = 0;
-                    $stmtCart = $con->prepare("SELECT number FROM cart WHERE P_ID =? AND C_ID = ?");
-                    $stmtCart->bind_param("ss", $pid, $cid);
-                    $stmtCart->execute();
-                    $resultCart = $stmtCart->get_result();
-                    if ($resultCart->num_rows > 0) {
-                        $rowCart = $resultCart->fetch_assoc();
-                        $num = $rowCart["number"];
-                    }
-                    echo "<p class = 'choosenum'><button class='minus' data-product-add='" . $pid . "'>-</button><input type='text' class='numberss' value='" . $num . "' readonly><button class='plus' data-product-add='" . $pid . "' >+</button></p>";
-                    ?>
-    </div>
-    <?php
-                echo "
-                        </div>
-                    </div><br />
-                ";
-            }
-            echo "</div><br />
-            </div>
-        </div>
-            </section>";
-        }
-    }
-
-
+    include("product.php")
     ?>
     <center>
         <button id="showHideBtn" class="btn btn-dark">SHOW MORE</button>
@@ -425,15 +367,13 @@ if ($result->num_rows == 1) {
                                 <img src="/assets/images/pour.jpg" alt="">
                             </div>
                             <div class="content">
-                                <a href="https://www.thewaytocoffee.com/batch-brew-vs-pour-over/" target="_blank"
-                                    class="title text-decoration-none">Batch Brew vs. Pour Over | The Pros and Cons
+                                <a href="https://www.thewaytocoffee.com/batch-brew-vs-pour-over/" target="_blank" class="title text-decoration-none">Batch Brew vs. Pour Over | The Pros and Cons
                                     Experienced by Coffee Professionals</a>
                                 <span>by The Way to Coffee</span>
                                 <p>Thinking back 15-20 years, I remember my parents going about their morning ritual of
                                     brewing coffee on weekends before burying...</p>
                                 <center>
-                                    <a href="https://www.thewaytocoffee.com/batch-brew-vs-pour-over/" target="_blank"
-                                        class="btn">Read More</a>
+                                    <a href="https://www.thewaytocoffee.com/batch-brew-vs-pour-over/" target="_blank" class="btn">Read More</a>
                                 </center>
                             </div>
                         </div>
@@ -444,15 +384,13 @@ if ($result->num_rows == 1) {
                                 <img src="/assets/images/carbon.webp" alt="">
                             </div>
                             <div class="content">
-                                <a href="https://www.taylorsofharrogate.co.uk/news/carbon-neutral-tea-and-coffee"
-                                    target="_blank" class="title text-decoration-none">Carbon Neutral Tea and Coffee</a>
+                                <a href="https://www.taylorsofharrogate.co.uk/news/carbon-neutral-tea-and-coffee" target="_blank" class="title text-decoration-none">Carbon Neutral Tea and Coffee</a>
                                 <span>by Taylors editorial team</span>
                                 <p>All our tea and coffee is carbon neutral – but what does that actually mean? Here’s
                                     an explanation of how we’ve lowered our carbon footprint, and the three projects in
                                     Kenya, Malawi and Uganda which have reduced the emissions of our products to...</p>
                                 <center>
-                                    <a href="https://www.taylorsofharrogate.co.uk/news/carbon-neutral-tea-and-coffee"
-                                        target="_blank" class="btn">Read More</a>
+                                    <a href="https://www.taylorsofharrogate.co.uk/news/carbon-neutral-tea-and-coffee" target="_blank" class="btn">Read More</a>
                                 </center>
                             </div>
                         </div>
@@ -463,15 +401,13 @@ if ($result->num_rows == 1) {
                                 <img src="/assets/images/coffeemaker.jpg" alt="">
                             </div>
                             <div class="content">
-                                <a href="https://coffeestylish.com/best-drip-coffee-makers/" target="_blank"
-                                    class="title text-decoration-none">BEST DRIP COFFEE MAKERS 2020</a>
+                                <a href="https://coffeestylish.com/best-drip-coffee-makers/" target="_blank" class="title text-decoration-none">BEST DRIP COFFEE MAKERS 2020</a>
                                 <span>by CoffeeStylish.com</span>
                                 <p>What is a good coffee maker? A good home coffee maker should have removable parts so
                                     it can be cleaned completely because you don’t want mold or buildups in your
                                     machine. It should be fast. It...</p>
                                 <center>
-                                    <a href="https://coffeestylish.com/best-drip-coffee-makers/" target="_blank"
-                                        class="btn">Read More</a>
+                                    <a href="https://coffeestylish.com/best-drip-coffee-makers/" target="_blank" class="btn">Read More</a>
                                 </center>
                             </div>
                         </div>
@@ -629,13 +565,11 @@ if ($result->num_rows == 1) {
                         <!-- User input box -->
                         <div class="chat-bar-input-block">
                             <div id="userInput">
-                                <input id="textInput" class="input-box" type="text" name="msg"
-                                    placeholder="Tap 'Enter' to send a message">
+                                <input id="textInput" class="input-box" type="text" name="msg" placeholder="Tap 'Enter' to send a message">
                                 <p></p>
                             </div>
                             <div class="chat-bar-icons">
-                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-paper-plane"
-                                    onclick="sendButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-paper-plane" onclick="sendButton()"></i>
                             </div>
                         </div>
                         <div id="chat-bar-bottom">
@@ -656,58 +590,27 @@ if ($result->num_rows == 1) {
     ?>
     <script src="/assets/js/responses.js"></script>
     <script src="/assets/js/convo.js"></script>
-    <script src="/assets/js/googleSignIn.js"></script>
 
 
     <script>
-    // CODE FOR THE FORMSPREE
-    window.onbeforeunload = () => {
-        for (const form of document.getElementsByTagName('form')) {
-            form.reset();
-        }
-    }
-
-    // CODE FOR THE GOOGLE MAPS API
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: 14.99367271992383,
-                lng: 120.17629231186626
-            },
-            zoom: 9
-        });
-
-        var marker = new google.maps.Marker({
-            position: {
-                lat: 14.99367271992383,
-                lng: 120.17629231186626
-            },
-            map: map,
-            title: 'Your Location'
-        });
-    }
-    $(document).ready(function() {
-        $(".pic-to-hide").hide();
-        $("#showBtn").text("SHOW MORE");
-        $("#showBtn").click(function() {
-            $(".pic-to-hide").toggle();
-            if ($(".pic-to-hide").is(":visible")) {
-                $(this).text("SHOW LESS");
-            } else {
-                $(this).text("SHOW MORE");
+        // CODE FOR THE FORMSPREE
+        window.onbeforeunload = () => {
+            for (const form of document.getElementsByTagName('form')) {
+                form.reset();
             }
-        });
-    });
-
-    // CODE FOR THE REDIRECT CART
-    function redirectCart() {
-        // Check if the user is logged in
-        if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
-            // Redirect the user to the login page
-            alert("You are not logged in. Please log into your account and try again.");
-            window.location.href = "login.php";
         }
-    }
+
+        // CODE FOR THE GOOGLE MAPS API
+
+        // CODE FOR THE REDIRECT CART
+        function redirectCart() {
+            // Check if the user is logged in
+            if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
+                // Redirect the user to the login page
+                alert("You are not logged in. Please log into your account and try again.");
+                window.location.href = "login.php";
+            }
+        }
     </script>
 
 </body>

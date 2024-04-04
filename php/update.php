@@ -2,7 +2,7 @@
 include("db.php");
 include("auth_session.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $targetDir = "C:\\Users\\quili\\OneDrive\\Máy tính\\cfclone\\coffee-shop-website\\assets\\images\\";
+    $targetDir = "../assets/images/";
     $targetFile = $targetDir . basename($_FILES["imgs"]["name"]);
     $insertimg =  basename($_FILES["imgs"]["name"]);
     $uploadOk = 1;
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $price = $_POST["prices"];
                 $file = basename($_FILES["imgs"]["name"]);
                 $stmt = $con->prepare("UPDATE product SET PName=?, prices=?, Material=?, image=?, validproduct=?, E_ID=? WHERE P_ID=?");
-                $stmt->bind_param("sssssss", $name, $price, $material, $imagePath, $valid, $eid, $id);
+                $stmt->bind_param("sssssss", $name, $price, $material, $file, $valid, $eid, $id);
                 $successMessage = "Updated Successfully!";
                 if ($stmt->execute()) {
                     echo  '<script>alert("Updated Successfully!");</script>';

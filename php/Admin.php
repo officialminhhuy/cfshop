@@ -234,7 +234,18 @@ if ($result->num_rows == 1) {
             </div>
         </div>
     </section>
-
+    <h1 class="heading">Our <span>Menu</span>
+        <div class="bordersort">
+            <span class="glyphicon glyphicon-sort"></span> Sort
+            <select id="sort" class="sort btn-default btn-sm">
+                <option value="1">Newest</option>
+                <option value="2">Price: High to Low</option>
+                <option value="3">Price: Low to High</option>
+                <option value="4">Name: A to Z</option>
+                <option value="5">Name: Z to A</option>
+            </select>
+        </div>
+    </h1>
     <!-- MENU -->
     <?php
     $vd = 0;
@@ -257,7 +268,7 @@ if ($result->num_rows == 1) {
                 echo "<img src='/assets/images/" . $row["image"] . "' alt='' class='product-img'>";
                 echo "<h3 class='product-title'>" . $row["PName"] . "</h3>";
                 // echo "<div class='price'>" . $row["prices"] . "VND</div>";
-                echo "<a class='btn views' onclick='openPopup()'  data-product-id='" . $row["P_ID"] . "'   >Edit</a>";
+                echo "<button class='btn views' onclick='openPopup()'  data-product-id='" . $row["P_ID"] . "'   >Edit</button>";
 
     ?>
     <!-- product details -->
@@ -266,8 +277,6 @@ if ($result->num_rows == 1) {
 
         <?php
                     echo "<p>Available: " . $row["validproduct"] . "</p>";
-                    echo "<p style='display: none;'><button class='minus'>-</button><input type='text' class='numberss' value='0'><button class='plus'>+</button></p>";
-                    // echo "<a class='btn add-cart' onclick='redirectCart()'>Add to Cart</a>";
                     ?>
     </div>
     <?php

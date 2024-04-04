@@ -919,6 +919,43 @@ input[type="file"] {
     font-size: 20px;
 }
 
+#material {
+    font-size: 20px;
+}
+
+#sort {
+    /* color: white;
+    background-color: black; */
+    /* border: 1px solid white; */
+    /* padding: 10px; */
+    width: auto;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid var(--main-color);
+
+}
+
+#sort:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 2px solid white;
+}
+
+#sort:active {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 2px solid black;
+}
+
+.bordersort {
+    text-align: right;
+}
+
+/* 
+.btn.btn-default.btn-sm {
+    background-color: none !important;
+} */
+
 .scfimg {
     width: 50px;
     height: 50px;

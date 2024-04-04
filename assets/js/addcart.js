@@ -7,7 +7,7 @@ function addLive(productadd) {
         success: function(response) {
             console.log(productadd)
             console.log(response)
-            alert("Updated Successfully!");
+            alert("Successful add to cart!");
             location.reload();
         },
         error: function(xhr, status, error) {
