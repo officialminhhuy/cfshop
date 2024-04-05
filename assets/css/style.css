@@ -148,6 +148,14 @@ section {
     width: 35rem;
     background-color: #fff;
     padding: 0 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 700px;
+    padding-bottom: 100px;
+}
+
+.header .cart::-webkit-scrollbar {
+    display: none;
 }
 
 .header .cart.active {
