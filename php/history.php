@@ -40,39 +40,6 @@ if ($result->num_rows == 1) {
 }
 
 ?>
-
-
-<?php
-include("db.php");
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $oldp = $_POST['oldp'];
-    $newp = $_POST['newp'];
-    $comp = $_POST['comp'];
-    $stmt = $con->prepare("SELECT password FROM accounts WHERE username = ? AND password = '" . md5($oldp) . "'");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows == 1) {
-        if ($newp === $comp) {
-            $stmt = $con->prepare("UPDATE accounts SET password = '" . md5($newp) . "' WHERE username = ?");
-            $stmt->bind_param("s", $username);
-            if ($stmt->execute()) {
-                echo "<script> alert('Update information successfully!')</script>";
-                header("Refresh:0");
-            } else {
-                echo "<script> alert('Failed to update information!')</script>";
-                header("Refresh:0");
-            }
-        } else {
-            echo "<script> alert('Comfirm password is not match')</script>";
-            header("Refresh:0");
-        }
-    } else {
-        echo "<script> alert('Old password is not true!')</script>";
-        header("Refresh:0");
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,20 +50,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>KapeTann Brewed Coffee Shop</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous">
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2Hhh_14Uam62GXGaTMcXWhhVkYg0EbDY&callback=initMap" async defer></script>
 
     <!-- Custom CSS File Link -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/convo.css">
     <link rel="stylesheet" href="/assets/css/homepage.css">
-    <link rel="stylesheet" href="/assets/css/changeinfo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- font awesome cdn link -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico"><!-- Favicon / Icon -->
@@ -176,47 +145,100 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 
     <!-- ACCOUNT MANAGEMENT -->
-    <div class="infoform">
-        <form method="post" class="form">
-            <label for="oldp" id="label">Old password:</label>
-            <input type="password" name="oldp" id="oldp" class="input" placeholder="Your old password" required>
-            <label for="newp" id="label">New password:</label>
-            <input type="password" name="newp" id="newp" class="input" placeholder="required !@#$%^&*." required>
-            <label for="comp" id="label">Confirm password:</label>
-            <input type="password" name="comp" id="comp" class="input" placeholder="required !@#$%^&*." required>
-            <div id="btn">
-                <button class="btn" type="submit" id="button">Change Password</button></br>
-            </div>
-            <div id="btn">
-                <a href="/php/changeinfo.php">
-                    <button class="btn" id="button" type="button">Edit profile</button>
-                </a>
-            </div>
-        </form>
+    <h2 id="title">History ordered</h2>
+    <div id="detailz"></div>
+    <div id="table">
+        <table>
+            <tr>
+                <th id="idcus">ID</th>
+                <th>Address</th>
+                <th>Total</th>
+                <th>Payment method</th>
+                <th>Time order</th>
+                <th></th>
+            </tr>
+            <?php
+            $stmt = $con->prepare("SELECT C_ID FROM customer WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows === 1) {
+                $row_status = $result->fetch_assoc(); // Fetch the result into $row_status
+                $cid = $row_status["C_ID"];
+                $stmt = $con->prepare("SELECT O_ID, Address, totalprice, paymentmethod FROM orders WHERE C_ID = ?");
+                $stmt->bind_param("i", $cid);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $ido = 0;
+                while ($row = $result->fetch_assoc()) {
+                    $stmt_status = $con->prepare("SELECT ImportDate FROM history WHERE O_ID = ?");
+                    $stmt_status->bind_param("s", $row["O_ID"]);
+                    $stmt_status->execute();
+                    $result_status = $stmt_status->get_result();
+                    if ($result_status->num_rows > 0) {
+                        $row_status = $result_status->fetch_assoc();
+                        $odt = $row_status["ImportDate"];
+                        $ido++;
+                    }
+            ?>
+            <tr>
+                <td><?php echo $ido ?></td>
+                <td><?php echo $row["Address"] ?></td>
+                <td><?php echo $row["totalprice"] ?> VND</td>
+                <td><?php echo $row["paymentmethod"] ?></td>
+                <td><?php echo $odt ?></td>
+                <td>
+                    <button class="btn his" onclick="openPopup()"
+                        data-order-id="<?php echo $row["O_ID"] ?>">Details</button>
+                </td>
+            </tr>
+            <?php
+                }
+            }
+            ?>
+
+
+        </table>
     </div>
 
     <!-- JS File Link -->
     <?php
     echo "<script src='/assets/js/script.js'></script>";
-    // if (!empty($_SESSION)) {
-
-    // }
     ?>
     <script src="/assets/js/responses.js"></script>
-    <script src="/assets/js/convo.js"></script>
-    <script src="/assets/js/googleSignIn.js"></script>
 
 
     <script>
-        // CODE FOR THE REDIRECT CART
-        function redirectCart() {
-            // Check if the user is logged in
-            if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
-                // Redirect the user to the login page
-                alert("You are not logged in. Please log into your account and try again.");
-                window.location.href = "login.php";
+    // function redirectCart() {
+    //     if (!"<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : '' ?>") {
+    //         alert("You are not logged in. Please log into your account and try again.");
+    //         window.location.href = "login.php";
+    //     }
+    // }
+
+    function viewhisLive(hisId) {
+        $.ajax({
+            url: "/php/historydetail.php",
+            method: "POST",
+            data: {
+                hisId: hisId
+            },
+            success: function(response) {
+                console.log(hisId);
+                $("#detailz").html(response).css("display", "block");
+            },
+            error: function(xhr, status, error) {
+                console.log(hisId);
+                console.error('Error:', error);
             }
-        }
+        });
+
+    }
+    $('.btn.his').click(function(e) {
+        e.preventDefault();
+        var hisId = $(this).data('order-id');
+        viewhisLive(hisId);
+    });
     </script>
 </body>
 

@@ -198,16 +198,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["imgs"])) {
                         <form method="post" enctype="multipart/form-data">
                             <h1 id="h1tt">
                                 Post product</h1>
-                            <label for="proname">Product name:</label>
+                            <label for="proname" id="ttpost">Product name:</label>
                             <input type="text" name="proname" id="postfield" placeholder="Name of product" required>
-                            <label for="material">Material:</label>
+                            <label for="material" id="ttpost">Material:</label>
                             <input type="text" name="material" id="postfield" placeholder="Detail of product" required>
-                            <label for="validpro">Numbers get:</label>
+                            <label for="validpro" id="ttpost">Numbers get:</label>
                             <input type="text" name="validpro" id="postfield" placeholder="Number get for sale"
                                 required>
-                            <label for="prices">Price:</label>
+                            <label for="prices" id="ttpost">Price:</label>
                             <input type="text" name="prices" id="postfield" placeholder="Sale price" required>
-                            <label for="imgs">Image:</label>
+                            <label for="imgs" id="ttpost">Image:</label>
                             <div id="file">
                                 <input type="file" id="imgfile" name="imgs" accept="image/*" required>
                             </div>

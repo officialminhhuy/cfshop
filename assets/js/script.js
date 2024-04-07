@@ -81,7 +81,8 @@ function checkout() {
                 alert("Checkout successful!");
                 location.reload();
             } else {
-                alert("Empty cart!");
+                alert("Error!");
+                location.reload();
                 console.log(response);
             }
         }
@@ -254,6 +255,9 @@ $('.btn.views').click(function(e) {
     var productId = $(this).data('product-id'); 
     viewLive(productId);
 });
+
+
+
 
 function hidePopup() {
     var popupScreen = document.querySelector(".popup-screen");

@@ -2,7 +2,7 @@
 include "db.php";
 include "auth_session.php";
 
-$stmt = $con->prepare("SELECT C_ID FROM customer WHERE username = ?");
+$stmt = $con->prepare("SELECT C_ID, Address FROM customer WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result1 = $stmt->get_result();
@@ -10,6 +10,7 @@ $result1 = $stmt->get_result();
 if ($result1->num_rows === 1) {
     $row = $result1->fetch_assoc();
     $cid = $row['C_ID'];
+    $address = $row['Address'];
     $total = 0;
 
     $stmt = $con->prepare("SELECT P_ID, totalprice, number FROM cart WHERE number > 0 AND C_ID = ?");
@@ -29,9 +30,9 @@ if ($result1->num_rows === 1) {
             );
         }
 
-        $stmt = $con->prepare("INSERT INTO orders (totalprice, paymentmethod, C_ID) VALUES (?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO orders (totalprice, paymentmethod, C_ID, Address) VALUES (?, ?, ?, ?)");
         $paymentmethod = "cash";
-        $stmt->bind_param("sss", $total, $paymentmethod, $cid);
+        $stmt->bind_param("ssss", $total, $paymentmethod, $cid, $address);
 
         if ($stmt->execute()) {
             $order_id = $stmt->insert_id;
