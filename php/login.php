@@ -88,25 +88,29 @@
         }
     } else {
     ?>
-        <form class="form" method="post" name="login">
-            <center>
-                <img src="../assets/images/logo.png" alt="" class="img img-fluid">
-            </center>
-            <hr />
-            <h1 class="login-title">Login</h1>
-            <input type="text" class="login-input" name="email" placeholder="Email" autofocus="true" />
-            <input type="password" class="login-input" name="password" placeholder="Password" />
-            <a href="/phpconnect/forgot.php">Forgotten password? </a>
-            <input type="submit" value="Login" name="submit" class="login-button" />
-            <p class="link">Don't have an account? <a href="/phpconnect/registration.php">Register here!</a></p>
-            <hr />
+    <form class="form" method="post" name="login">
+        <center>
+            <img src="../assets/images/logo.png" alt="" class="img img-fluid">
+        </center>
+        <hr />
+        <h1 class="login-title">Login</h1>
+        <input type="text" class="login-input" name="email" placeholder="Email" autofocus="true" />
+        <input type="password" class="login-input" name="password" id="showpass" placeholder="Password" />
+        <input type="checkbox" onclick="myFunction()" style="margin-bottom: 20px;">Show Password </br>
+        <a href="/phpconnect/forgot.php">Forgotten password? </a>
+        <input type="submit" value="Login" name="submit" class="login-button" />
+        <p class="link">Don't have an account? <a href="/phpconnect/registration.php">Register here!</a></p>
+        <hr />
 
-            <div id="g_id_onload" data-client_id="838321752460-6ah497tdpkbekj7lfj5so48suaqhu1e7.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="https://kapetanncoffeeshop.infinityfreeapp.com" data-auto_prompt="false">
-            </div>
+        <div id="g_id_onload" data-client_id="838321752460-6ah497tdpkbekj7lfj5so48suaqhu1e7.apps.googleusercontent.com"
+            data-context="signin" data-ux_mode="popup" data-login_uri="https://kapetanncoffeeshop.infinityfreeapp.com"
+            data-auto_prompt="false">
+        </div>
 
-            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="center" data-callback="onSignIn">
-            </div>
-        </form>
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+            data-text="signin_with" data-size="large" data-logo_alignment="center" data-callback="onSignIn">
+        </div>
+    </form>
     <?php
     }
     ?>
@@ -114,28 +118,18 @@
     <script src="js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- <script>
-        function onSignIn(googleUser) {
-            // Get the user ID token
-            var id_token = googleUser.getAuthResponse().id_token;
+    <script>
+    function myFunction() {
+        var x = document.getElementById("showpass");
 
-            // Send the token to the server using AJAX
-            $.ajax({
-                type: 'POST',
-                url: 'set_session.php',
-                data: {
-                    id_token: id_token
-                },
-                success: function(response) {
-                    // Redirect to the index.php page
-                    window.location.href = 'index.php';
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
-    </script> -->
+    }
+    </script>
+
 </body>
 
 </html>

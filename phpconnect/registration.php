@@ -77,9 +77,10 @@
             <label for="email">Email:</label>
             <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
             <label for="password">Password:</label>
-            <input type="text" class="login-input" name="password" placeholder="Password" required />
+            <input type="password" class="login-input" name="password" id="showpass" placeholder="Password" required />
             <label for="cfpassword">Confirm password:</label>
-            <input type="text" class="login-input" name="cfpassword" placeholder="Confirm password" required>
+            <input type="password" class="login-input" name="cfpassword" id="showcfpass" placeholder="Confirm password" required>
+            <input type="checkbox" onclick="myFunction()" style="margin-bottom: 20px;">Show Password </br>
             <input type="submit" name="login-button" value="Register" class="login-button" id="login-button">
             <p class="link">Already have an account? <a href="/php/login.php">Login here!</a></p>
         </form>
@@ -87,5 +88,20 @@
     }
     ?>
 </body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("showpass");
+        var y = document.getElementById("showcfpass");
+
+        if (x.type === "password") {
+            x.type = "text";
+            y.type = "text"; // Change type to text for y element
+        } else {
+            x.type = "password";
+            y.type = "password"; // Change type to password for y element
+        }
+    }
+</script>
+
 
 </html>

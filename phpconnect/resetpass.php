@@ -50,11 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form id="form" method="post" style="text-align: center; width: 60%; margin: auto; max-width: 500px; ">
                 <div class="form-group">
                     <label for="password">New Password:</label>
-                    <input type="password" id="password" name="password" pattern=".*[A-Z].*[!@#$%^&*()-=_+{}[];':.,/<>?`~].*" minlength="8" maxlength="16" title="Password must contain at least one UPPERCASE and special character" required>
+                    <input type="password" id="password" name="password"
+                        pattern=".*[A-Z].*[!@#$%^&*()-=_+{}[];':.,/<>?`~].*" minlength="8" maxlength="16"
+                        title="Password must contain at least one UPPERCASE and special character" required>
                 </div>
                 <div class="form-group">
                     <label for="cfpassword">Confirm Password:</label>
-                    <input type="password" id="cfpassword" name="cfpassword" title="The confirm password not match" required>
+                    <input type="password" id="cfpassword" name="cfpassword" title="The confirm password not match"
+                        required>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="signupbtn" name="signupbtn" required>Change Password</button>
@@ -64,5 +67,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </body>
+<script>
+function myFunction() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("cfpassword");
+
+    if (x.type === "password") {
+        x.type = "text";
+        y.type = "text"; // Change type to text for y element
+    } else {
+        x.type = "password";
+        y.type = "password"; // Change type to password for y element
+    }
+}
+</script>
+
 
 </html>
