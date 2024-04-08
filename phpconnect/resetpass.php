@@ -1,21 +1,19 @@
 <?php
 session_start();
 require('db.php');
-// if (!empty($_SESSION)) {
-//     $username = $_SESSION["username"];
-//     $stmt = $con->prepare("SELECT otpcode FROM verify WHERE username = ?");
-//     $stmt->bind_param("s", $username);
-//     $stmt->execute();
-//     $result = $stmt->get_result();
-//     $row = $result->fetch_assoc();
-//     if (empty($row['otpcode'])) {
-//         header("Location: /phpconnect/forgot.php");
-//         exit();
-//     }
-// } else {
-//     header("Location: /phpconnect/forgot.php");
-//     exit();
-// }
+session_start();
+if (!empty($_SESSION)) {
+    $username = $_SESSION["username"];
+    $query    = "SELECT username FROM `employees` WHERE username='$username'";
+    $result = mysqli_query($con, $query);
+    $rows = mysqli_num_rows($result);
+    if ($rows == 1) {
+        header("Location: /php/Admin.php");
+    } else {
+
+        header("Location: /php/index.php");
+    }
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_SESSION["username"];
     $password = $_POST['password'];
@@ -26,7 +24,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result) {
         $_SESSION["username"] = $username;
         $_SESSION["password"] = $password;
-        header("Location: /phpconnect/Sucess.php");
+        $query    = "SELECT username FROM `employees` WHERE username='$username'";
+        $result = mysqli_query($con, $query);
+        $rows = mysqli_num_rows($result);
+        if ($rows == 1) {
+            echo "<script>alert('Change Password Successfully');</script>";
+            $stmt = $con->prepare("SELECT EName FROM employees WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows === 1) {
+                $row = $result->fetch_assoc();
+                $name = $row['EName'];
+                $_SESSION['name'] = $name;
+            }
+            header("Refresh:0; url=/php/Admin.php");
+        } else {
+            echo "<script>alert('Change Password Successfully');</script>";
+            $stmt = $con->prepare("SELECT CName FROM customer WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows === 1) {
+                $row = $result->fetch_assoc();
+                $name = $row['CName'];
+                $_SESSION['name'] = $name;
+            }
+            header("Refresh:0; url=/php/index.php");
+        }
     }
 }
 ?>
@@ -50,14 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form id="form" method="post" style="text-align: center; width: 60%; margin: auto; max-width: 500px; ">
                 <div class="form-group">
                     <label for="password">New Password:</label>
-                    <input type="password" id="password" name="password"
-                        pattern=".*[A-Z].*[!@#$%^&*()-=_+{}[];':.,/<>?`~].*" minlength="8" maxlength="16"
-                        title="Password must contain at least one UPPERCASE and special character" required>
+                    <input type="password" id="password" name="password" pattern=".*[A-Z].*[!@#$%^&*()-=_+{}[];':.,/<>?`~].*" minlength="8" maxlength="16" title="Password must contain at least one UPPERCASE and special character" required>
                 </div>
                 <div class="form-group">
                     <label for="cfpassword">Confirm Password:</label>
-                    <input type="password" id="cfpassword" name="cfpassword" title="The confirm password not match"
-                        required>
+                    <input type="password" id="cfpassword" name="cfpassword" title="The confirm password not match" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="signupbtn" name="signupbtn" required>Change Password</button>
@@ -68,18 +90,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 <script>
-function myFunction() {
-    var x = document.getElementById("password");
-    var y = document.getElementById("cfpassword");
+    function myFunction() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("cfpassword");
 
-    if (x.type === "password") {
-        x.type = "text";
-        y.type = "text"; // Change type to text for y element
-    } else {
-        x.type = "password";
-        y.type = "password"; // Change type to password for y element
+        if (x.type === "password") {
+            x.type = "text";
+            y.type = "text"; // Change type to text for y element
+        } else {
+            x.type = "password";
+            y.type = "password"; // Change type to password for y element
+        }
     }
-}
 </script>
 
 

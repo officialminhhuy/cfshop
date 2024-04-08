@@ -57,17 +57,17 @@
         $stmt->close();
     } else {
     ?>
-        <form class="form" action="" method="post">
-            <center>
-                <img src="../assets/images/logo.png" alt="" class="img img-fluid">
-            </center>
-            <hr />
-            <h1 class="login-title">Send OTP</h1>
-            <label for="email">Email:</label>
-            <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
-            <input type="submit" name="login-button" value="Register" class="login-button" id="login-button">
-            <p class="link">Already have an account? <a href="/php/login.php">Login here!</a></p>
-        </form>
+    <form class="form" action="" method="post">
+        <center>
+            <img src="../assets/images/logo.png" alt="" class="img img-fluid">
+        </center>
+        <hr />
+        <h1 class="login-title">Send OTP</h1>
+        <label for="email">Email:</label>
+        <input type="text" class="login-input" name="email" placeholder="Example@gmail.com" required />
+        <input type="submit" name="login-button" value="Send OTP" class="login-button" id="login-button">
+        <p class="link">Already have an account? <a href="/php/login.php">Login here!</a></p>
+    </form>
     <?php
     }
     ?>
